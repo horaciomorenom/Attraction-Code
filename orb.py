@@ -1,6 +1,5 @@
 #%%
 
-from turtle import position
 import numpy as np
 import matplotlib.pyplot as plt
 
