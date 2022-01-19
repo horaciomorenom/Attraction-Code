@@ -1,3 +1,4 @@
+from turtle import distance
 import numpy as np
 
 def normalize(v):
@@ -53,4 +54,17 @@ class orb:
     def calculate_distance_travelled(self):
         self.distance = np.sum(np.sqrt(np.sum(np.diff(self.positions, axis=0)**2, axis=1)))
 
+def get_orb_distance(orb1, orb2):
 
+    return np.linalg.norm(orb1.position - orb2.position)
+
+def get_max_orb_distance(orbs): # I know that I am doing more work than supposed to but I don't want to think
+
+    distances = np.array([])
+
+    for orb1 in orbs:
+        for orb2 in orbs:
+            distances = np.append(distances, get_orb_distance(orb1, orb2))
+    return np.max(distances)
+
+    
