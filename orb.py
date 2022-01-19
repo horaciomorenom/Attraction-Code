@@ -1,4 +1,3 @@
-from turtle import distance
 import numpy as np
 
 def normalize(v):
@@ -8,27 +7,6 @@ def normalize(v):
     return v/norm
 
 class orb:
-    """
-    A class used to represent an orb in the 2-D attraction experiment
-
-    ...
-
-    Attributes
-    ----------
-    position : np.ndarray
-        2-vector specifying the particle's position
-    name : str
-        the name of the animal
-    sound : str
-        the sound that the animal makes
-    num_legs : int
-        the number of legs the animal has (default 4)
-
-    Methods
-    -------
-    says(sound=None)
-        Prints the animals name and what sound it makes
-    """
 
     def __init__(self, position):
         self.position = position
@@ -67,4 +45,19 @@ def get_max_orb_distance(orbs): # I know that I am doing more work than supposed
             distances = np.append(distances, get_orb_distance(orb1, orb2))
     return np.max(distances)
 
-    
+def evolve_orbs(orbs,t , dt, stop_distance, max_dists, time_array):
+
+    while max_dists[-1] >= 0.3:
+
+        for orb in orbs:
+            orb.update_velocity()
+        
+        for orb in orbs:
+            orb.update_position(dt)
+
+    t += dt
+    time_array = np.append(time_array, t)
+
+    max_dists = np.append(max_dists, get_max_orb_distance(orbs))
+
+    return time_array, max_dists
